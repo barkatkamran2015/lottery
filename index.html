@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LottoMax Number Generator</title>
+  <title>Lotto Number Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EPBVM60VN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EPBVM60VN2');
+  </script>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- Navigation Bar -->
   <nav class="bg-blue-900 text-white p-4 sticky top-0 shadow-md z-10">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold">LottoMax Generator</h1>
+      <h1 class="text-xl font-bold">Lotto Generator</h1>
       <div class="space-x-4">
         <a href="#generator" class="hover:text-blue-300">Generator</a>
         <a href="#rules" class="hover:text-blue-300">Rules</a>
@@ -25,9 +33,16 @@
   <main class="container mx-auto p-6 flex-1">
     <!-- Generator Section -->
     <section id="generator" class="py-12">
-      <h2 class="text-3xl font-bold text-center text-white mb-8 section-title">Generate Your Lucky Numbers</h2>
+      <h2 class="text-3xl font-bold text-center text-white mb-8 section-title" data-game="LottoMax">Generate Your Lucky LottoMax Numbers</h2>
       <div class="generator-card bg-white rounded-lg shadow-xl p-8 max-w-lg mx-auto">
-        <p class="text-center text-gray-600 mb-6">Try your luck with Canada's LottoMax! Pick a strategy and generate your numbers.</p>
+        <p class="text-center text-gray-600 mb-6">Try your luck with Canada's LottoMax or Lotto 6/49! Select a game, pick a strategy, and generate your numbers.</p>
+        <div class="mb-6">
+          <label for="game" class="block text-sm font-medium text-gray-700">Choose Game:</label>
+          <select id="game" class="mt-1 block w-full p-3 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+            <option value="lottoMax">LottoMax (7 Numbers)</option>
+            <option value="lotto649">Lotto 6/49 (6 Numbers)</option>
+          </select>
+        </div>
         <div class="mb-6">
           <label for="strategy" class="block text-sm font-medium text-gray-700">Choose Strategy:</label>
           <select id="strategy" class="mt-1 block w-full p-3 border rounded-md focus:ring-blue-500 focus:border-blue-500">
@@ -35,6 +50,38 @@
             <option value="hot">Hot Numbers (Most Frequent)</option>
             <option value="cold">Cold Numbers (Least Frequent)</option>
           </select>
+        </div>
+        <div class="mb-6">
+          <label class="flex items-center">
+            <input type="checkbox" id="use-astrology" class="mr-2">
+            <span class="text-sm font-medium text-gray-700">Use Astrology-Based Strategy</span>
+          </label>
+          <div id="astrology-inputs" class="mt-2 hidden">
+            <label for="birthdate" class="block text-sm font-medium text-gray-700">Enter Birthdate (YYYY-MM-DD):</label>
+            <input type="date" id="birthdate" class="mt-1 block w-full p-3 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+            <label for="zodiac" class="block text-sm font-medium text-gray-700 mt-2">Or Select Zodiac Sign:</label>
+            <select id="zodiac" class="mt-1 block w-full p-3 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+              <option value="aries">Aries (Mar 21 - Apr 19)</option>
+              <option value="taurus">Taurus (Apr 20 - May 20)</option>
+              <option value="gemini">Gemini (May 21 - Jun 20)</option>
+              <option value="cancer">Cancer (Jun 21 - Jul 22)</option>
+              <option value="leo">Leo (Jul 23 - Aug 22)</option>
+              <option value="virgo">Virgo (Aug 23 - Sep 22)</option>
+              <option value="libra">Libra (Sep 23 - Oct 22)</option>
+              <option value="scorpio">Scorpio (Oct 23 - Nov 21)</option>
+              <option value="sagittarius">Sagittarius (Nov 22 - Dec 21)</option>
+              <option value="capricorn">Capricorn (Dec 22 - Jan 19)</option>
+              <option value="aquarius">Aquarius (Jan 20 - Feb 18)</option>
+              <option value="pisces">Pisces (Feb 19 - Mar 20)</option>
+            </select>
+            <p class="text-xs text-gray-500 mt-2">Astrology-based numbers are for entertainment purposes only and have no scientific basis.</p>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label class="flex items-center">
+            <input type="checkbox" id="include-bonus" class="mr-2">
+            <span class="text-sm font-medium text-gray-700">Include Bonus Number</span>
+          </label>
         </div>
         <button id="generate-btn" class="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition font-semibold">Generate Numbers</button>
         <div id="numbers" class="flex flex-wrap justify-center mt-6"></div>
@@ -51,20 +98,34 @@
 
     <!-- Rules Section -->
     <section id="rules" class="py-12 bg-white rounded-lg shadow-lg p-8 mb-12">
-      <h2 class="text-2xl font-bold text-blue-900 mb-6 section-title">LottoMax Rules</h2>
-      <p class="text-gray-600 mb-4">LottoMax is Canada’s exciting lottery game with jackpots up to $70 million! Here’s how it works:</p>
-      <ul class="list-disc pl-6 space-y-2 text-gray-600">
-        <li>Choose 7 numbers from 1 to 50 or use our generator.</li>
-        <li>A bonus number is drawn for secondary prizes.</li>
-        <li>Draws happen every Tuesday and Friday.</li>
-        <li>Match all 7 numbers to win the jackpot!</li>
-        <li>Smaller prizes are available for matching 3 or more numbers.</li>
-      </ul>
+      <h2 class="text-2xl font-bold text-blue-900 mb-6 section-title">Game Rules</h2>
+      <div id="lottoMax-rules">
+        <h3 class="text-lg font-semibold text-blue-900 mb-2">LottoMax</h3>
+        <p class="text-gray-600 mb-4">LottoMax is Canada’s exciting lottery game with jackpots up to $70 million! Here’s how it works:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          <li>Choose 7 numbers from 1 to 49 or use our generator.</li>
+          <li>Optionally include a bonus number for secondary prizes (e.g., match 6 + bonus).</li>
+          <li>Draws happen every Tuesday and Friday.</li>
+          <li>Match all 7 numbers to win the jackpot!</li>
+          <li>Smaller prizes are available for matching 3 or more numbers.</li>
+        </ul>
+      </div>
+      <div id="lotto649-rules" class="mt-6">
+        <h3 class="text-lg font-semibold text-blue-900 mb-2">Lotto 6/49</h3>
+        <p class="text-gray-600 mb-4">Lotto 6/49 offers big jackpots and is one of Canada’s favorite lotteries! Here’s how it works:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          <li>Choose 6 numbers from 1 to 49 or use our generator.</li>
+          <li>Optionally include a bonus number for secondary prizes (e.g., match 5 + bonus).</li>
+          <li>Draws happen every Wednesday and Saturday.</li>
+          <li>Match all 6 numbers to win the jackpot!</li>
+          <li>Smaller prizes are available for matching 2 or more numbers.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- Tips Section -->
     <section id="tips" class="py-12">
-      <h2 class="text-2xl font-bold text-white mb-6 section-title">Tips for Playing LottoMax</h2>
+      <h2 class="text-2xl font-bold text-white mb-6 section-title">Tips for Playing</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg p-6 shadow-md">
           <h3 class="text-lg font-semibold text-blue-900">Play Consistently</h3>
@@ -72,7 +133,7 @@
         </div>
         <div class="bg-white rounded-lg p-6 shadow-md">
           <h3 class="text-lg font-semibold text-blue-900">Try Different Strategies</h3>
-          <p class="text-gray-600">Mix up random, hot, and cold numbers to keep things fun and unpredictable.</p>
+          <p class="text-gray-600">Mix up random, hot, cold, or astrology-based numbers to keep things fun.</p>
         </div>
         <div class="bg-white rounded-lg p-6 shadow-md">
           <h3 class="text-lg font-semibold text-blue-900">Join a Pool</h3>
@@ -90,12 +151,12 @@
       <h2 class="text-2xl font-bold text-blue-900 mb-6 section-title">Frequently Asked Questions</h2>
       <div class="space-y-4">
         <div>
-          <h3 class="text-lg font-semibold text-gray-700">Is this an official LottoMax site?</h3>
-          <p class="text-gray-600">No, this is a number generator tool to help you pick numbers. You must purchase tickets through official retailers.</p>
+          <h3 class="text-lg font-semibold text-gray-700">Is this an official lottery site?</h3>
+          <p class="text-gray-600">No, this is a number generator tool to help you pick numbers for LottoMax or Lotto 6/49. You must purchase tickets through official retailers.</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold text-gray-700">Do hot or cold numbers guarantee a win?</h3>
-          <p class="text-gray-600">No, all numbers have an equal chance of being drawn. Hot and cold numbers are based on past draws for fun!</p>
+          <h3 class="text-lg font-semibold text-gray-700">Do hot, cold, or astrology-based numbers guarantee a win?</h3>
+          <p class="text-gray-600">No, all numbers have an equal chance of being drawn. These strategies are for fun and entertainment only.</p>
         </div>
         <div>
           <h3 class="text-lg font-semibold text-gray-700">Can I save my numbers?</h3>
@@ -108,8 +169,8 @@
   <!-- Footer -->
   <footer class="bg-blue-900 text-white p-6">
     <div class="container mx-auto text-center">
-      <p class="text-sm">LottoMax Number Generator © 2025. Not affiliated with official LottoMax. Play responsibly.</p>
-      <p class="text-sm mt-2">Contact: <a href="mailto:bjamin558@gmail.com" class="underline hover:text-blue-300">bjamin558@gmail.com</a></p>
+      <p class="text-sm">Lotto Number Generator © 2025. Not affiliated with official LottoMax or Lotto 6/49. Play responsibly.</p>
+      <p class="text-sm mt-2">Contact: <a href="mailto:support@lottogenerator.ca" class="underline hover:text-blue-300">support@lottogenerator.ca</a></p>
     </div>
   </footer>
 
