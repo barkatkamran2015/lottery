@@ -1,0 +1,53 @@
+body {
+    background: linear-gradient(to bottom, #1e3a8a, #93c5fd);
+    color: #1f2937;
+  }
+  .number-ball {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #3b82f6, #1e40af);
+    color: white;
+    font-weight: bold;
+    margin: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  }
+  .number-ball.bonus {
+    background: linear-gradient(to bottom, #f59e0b, #b45309);
+  }
+  .number-ball:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .generator-card {
+    background: linear-gradient(to bottom right, #ffffff, #e0f2fe);
+    transition: transform 0.3s;
+  }
+  .generator-card:hover {
+    transform: translateY(-5px);
+  }
+  .section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background: #3b82f6;
+  }

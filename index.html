@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LottoMax Number Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Navigation Bar -->
+  <nav class="bg-blue-900 text-white p-4 sticky top-0 shadow-md z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">LottoMax Generator</h1>
+      <div class="space-x-4">
+        <a href="#generator" class="hover:text-blue-300">Generator</a>
+        <a href="#rules" class="hover:text-blue-300">Rules</a>
+        <a href="#tips" class="hover:text-blue-300">Tips</a>
+        <a href="#faq" class="hover:text-blue-300">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto p-6 flex-1">
+    <!-- Generator Section -->
+    <section id="generator" class="py-12">
+      <h2 class="text-3xl font-bold text-center text-white mb-8 section-title">Generate Your Lucky Numbers</h2>
+      <div class="generator-card bg-white rounded-lg shadow-xl p-8 max-w-lg mx-auto">
+        <p class="text-center text-gray-600 mb-6">Try your luck with Canada's LottoMax! Pick a strategy and generate your numbers.</p>
+        <div class="mb-6">
+          <label for="strategy" class="block text-sm font-medium text-gray-700">Choose Strategy:</label>
+          <select id="strategy" class="mt-1 block w-full p-3 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+            <option value="random">Random (Pure Luck)</option>
+            <option value="hot">Hot Numbers (Most Frequent)</option>
+            <option value="cold">Cold Numbers (Least Frequent)</option>
+          </select>
+        </div>
+        <button id="generate-btn" class="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition font-semibold">Generate Numbers</button>
+        <div id="numbers" class="flex flex-wrap justify-center mt-6"></div>
+        <p id="legend" class="text-center text-sm text-gray-500 mt-4"></p>
+        <div id="history" class="mt-8">
+          <h3 class="text-lg font-semibold text-gray-700">Recent Generations</h3>
+          <ul id="history-list" class="mt-2 space-y-2"></ul>
+        </div>
+        <div class="mt-6 text-center">
+          <button id="share-btn" class="bg-green-500 text-white p-3 rounded-md hover:bg-green-600 transition font-semibold" disabled>Share Your Numbers</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="py-12 bg-white rounded-lg shadow-lg p-8 mb-12">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6 section-title">LottoMax Rules</h2>
+      <p class="text-gray-600 mb-4">LottoMax is Canada’s exciting lottery game with jackpots up to $70 million! Here’s how it works:</p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-600">
+        <li>Choose 7 numbers from 1 to 50 or use our generator.</li>
+        <li>A bonus number is drawn for secondary prizes.</li>
+        <li>Draws happen every Tuesday and Friday.</li>
+        <li>Match all 7 numbers to win the jackpot!</li>
+        <li>Smaller prizes are available for matching 3 or more numbers.</li>
+      </ul>
+    </section>
+
+    <!-- Tips Section -->
+    <section id="tips" class="py-12">
+      <h2 class="text-2xl font-bold text-white mb-6 section-title">Tips for Playing LottoMax</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-lg font-semibold text-blue-900">Play Consistently</h3>
+          <p class="text-gray-600">Regular play increases your chances over time. Set a budget and stick to it!</p>
+        </div>
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-lg font-semibold text-blue-900">Try Different Strategies</h3>
+          <p class="text-gray-600">Mix up random, hot, and cold numbers to keep things fun and unpredictable.</p>
+        </div>
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-lg font-semibold text-blue-900">Join a Pool</h3>
+          <p class="text-gray-600">Play with friends or colleagues to buy more tickets and share the winnings.</p>
+        </div>
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-lg font-semibold text-blue-900">Check Results Promptly</h3>
+          <p class="text-gray-600">Don’t miss out on prizes—check your numbers after each draw!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-12 bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6 section-title">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Is this an official LottoMax site?</h3>
+          <p class="text-gray-600">No, this is a number generator tool to help you pick numbers. You must purchase tickets through official retailers.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Do hot or cold numbers guarantee a win?</h3>
+          <p class="text-gray-600">No, all numbers have an equal chance of being drawn. Hot and cold numbers are based on past draws for fun!</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Can I save my numbers?</h3>
+          <p class="text-gray-600">Your recent generations are shown in the history section. You can also share them for reference.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white p-6">
+    <div class="container mx-auto text-center">
+      <p class="text-sm">LottoMax Number Generator © 2025. Not affiliated with official LottoMax. Play responsibly.</p>
+      <p class="text-sm mt-2">Contact: <a href="mailto:bjamin558@gmail.com" class="underline hover:text-blue-300">bjamin558@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
